@@ -1,0 +1,79 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/addTodo/addTodo",
+    "pages/todoInfo/todoInfo",
+    "pages/me/me",
+    "pages/login/login",
+    "pages/room/room"
+  ],
+  "tabBar":{
+    "selectedColor": "#FFA500",
+    "list": [
+      {
+        "text":"首页",
+        "pagePath":"pages/index/index",
+        "iconPath":"pages/icons/index.png",
+        "selectedIconPath":"pages/icons/indexSelected.png"
+      },
+      {
+        "text":"橙墙",
+        "pagePath":"pages/index/index",
+        "iconPath":"pages/icons/wall.png",
+        "selectedIconPath":"pages/icons/wallSelected.png"
+      },
+      {
+        "text":"",
+        "pagePath":"pages/room/room",
+        "iconPath":"pages/icons/plus.png",
+        "selectedIconPath":"pages/icons/plusSelected.png"
+      },
+      {
+        "text":"消息",
+        "pagePath":"pages/index/index",
+        "iconPath":"pages/icons/message.png",
+        "selectedIconPath":"pages/icons/messageSelected.png"
+      },
+      {
+        "text":"我",
+        "pagePath":"pages/me/me",
+        "iconPath":"pages/icons/me.png",
+        "selectedIconPath":"pages/icons/meSelected.png",
+        "selectedColor": "#FFA500"
+      }
+    ]
+  },
+  "plugins": {
+    "ocr-plugin": {
+      "version": "3.0.1",
+      "provider": "wx4418e3e031e551be"
+    }
+  },
+  "window": {
+    "backgroundColor": "#FFA500",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFA500",
+    "navigationBarTitleText": "橙知",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-cell": "@vant/weapp/cell",
+    "van-cell-group": "@vant/weapp/cell-group",
+    "van-icon": "@vant/weapp/icon",
+    "van-field": "@vant/weapp/field",
+    "van-search": "@vant/weapp/search",
+    "van-grid": "@vant/weapp/grid",
+    "van-grid-item": "@vant/weapp/grid-item",
+    "van-notice-bar": "@vant/weapp/notice-bar",
+    "van-image": "@vant/weapp/image"
+    
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于任务的设定" 
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

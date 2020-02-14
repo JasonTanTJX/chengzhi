@@ -1,0 +1,86 @@
+<view>
+<van-search placeholder="请输入搜索关键词" value="{{ value }}" 
+  bind:search="onSearch"
+   background="#FFA500"/>
+<van-notice-bar
+  left-icon="//img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
+  text="欢迎各位体验官对橙知提出宝贵意见，我们将不断完善致力于给您提供更好的服务。"
+/>
+
+<van-grid clickable column-num="5" border="{{ false }}">
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/selfbetter.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="自我进阶"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/volunteer.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="公益志愿"
+  />
+    <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/society.png"
+    link-type="navigateTo"
+    url="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/society.png"
+    text="社会实践"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/world.png"
+    link-type="reLaunch"
+    url="/pages/dashboard/index"
+    text="发现世界"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/book.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="良书益友"
+  />
+</van-grid>
+<van-grid clickable column-num="5" border="{{ false }}">
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/fitness.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="健身达人"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/food.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="美食侦探"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/study.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="游学体验"
+  />
+    <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/strategy.png"
+    link-type="reLaunch"
+    url="//m.ctrip.com/webapp/you/travels/100008/3898849.html?allianceid=1039214&sid=1682165&twojumpwakeup=1&sepopup=126"
+    text="旅行攻略"
+  />
+  <van-grid-item
+    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/visa.png"
+    link-type="navigateTo"
+    url="/pages/dashboard/index"
+    text="签证护照"
+  />
+</van-grid>
+</view>
+<!-- <view class="plusBtn">
+  <navigator url="../addTodo/addTodo">
+    <van-icon class="plusIcon" name="plus" />
+  </navigator>
+</view> -->
+<!-- <van-cell-group>
+  <block wx:for="{{tasks}}">
+    <navigator url="../todoInfo/todoInfo?id={{item._id}}">
+      <van-cell title="{{item.title}}"/>
+    </navigator>
+  </block>
+</van-cell-group> -->

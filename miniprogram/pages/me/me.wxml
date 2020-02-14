@@ -1,0 +1,9 @@
+<view class="container">
+    <van-image
+    round
+    width="4rem"
+    height="4rem"
+    src="{{avatarUrl}}"
+    />
+    <text class="czid">{{czid}}</text>
+</view>

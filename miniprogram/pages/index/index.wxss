@@ -1,0 +1,13 @@
+/* .plusBtn {
+  position: fixed;
+  z-index: 100;
+  bottom: 100rpx;
+  right: 345rpx;
+  background-color: aquamarine;
+  border-radius: 100rpx;
+  width: 80rpx;
+} */
+
+/* .plusIcon{
+  font-size: 80rpx;
+} */

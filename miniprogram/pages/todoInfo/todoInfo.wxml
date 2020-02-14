@@ -1,0 +1,24 @@
+<van-cell-group>
+  <van-cell 
+  title="标题：{{task.title}}"
+  border="{{ false }}"
+  value="{{task.status == 'processing'?'进行中':'已完成'}}"
+  />
+   <van-cell 
+  title="日期：{{task.date}}"
+  border="{{ false }}"
+  />
+  <van-cell 
+  title="时间：{{task.time}}"
+  border="{{ false }}"
+  />
+  <van-cell 
+  wx:if="{{task.location}}"
+  title="位置"
+  icon="location"
+  border="{{ false }}"
+  value="{{task.location.name}}"
+  bind:click="viewLocation"
+  />
+</van-cell-group>
+<image wx:if="{{task.image}}" src="{{task.image}}"></image>
