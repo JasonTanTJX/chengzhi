@@ -41,17 +41,17 @@ Page({
       getOpenID: this.getOpenID,
     })
 
-    wx.getSystemInfo({
-      success: res => {
-        console.log('system info', res)
-        if (res.safeArea) {
-          const { top, bottom } = res.safeArea
-          this.setData({
-            containerStyle: `padding-top: ${(/ios/i.test(res.system) ? 10 : 20) + top}px; padding-bottom: ${20 + res.windowHeight - bottom}px`,
-          })
-        }
-      },
-    })
+    // wx.getSystemInfo({
+    //   success: res => {
+    //     console.log('system info', res)
+    //     if (res.safeArea) {
+    //       const { top, bottom } = res.safeArea
+    //       this.setData({
+    //         containerStyle: `padding-top: ${(/ios/i.test(res.system) ? 10 : 20) + top}px; padding-bottom: ${20 + res.windowHeight - bottom}px`,
+    //       })
+    //     }
+    //   },
+    // })
   },
 
   getOpenID: async function() {

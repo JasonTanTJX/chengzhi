@@ -1,4 +1,5 @@
-<view class="container" style="{{containerStyle}}">
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}"><view slot="content">{{chatRoomGroupName}}</view></cu-custom>
+<view class="container" style="{{containerStyle}}" >  
   <chatroom
     style="width: 100%; height: 100%"
     envId="{{chatRoomEnvId}}"
@@ -10,3 +11,14 @@
     getOpenID="{{getOpenID}}"
   ></chatroom>
 </view>
+<!-- <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <view class="action">
+    <text class="cuIcon-sound text-grey"></text>
+  </view>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+  <view class="action">
+    <text class="cuIcon-emojifill text-grey"></text>
+  </view>
+  <button class="cu-btn bg-green shadow">发送</button>
+</view> -->
+

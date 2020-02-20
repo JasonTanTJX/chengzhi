@@ -5,41 +5,43 @@
     "pages/todoInfo/todoInfo",
     "pages/me/me",
     "pages/login/login",
-    "pages/room/room"
+    "pages/room/room",
+    "pages/publish/publish",
+    "pages/wall/wall",
+    "pages/message/message"
   ],
   "tabBar":{
-    "selectedColor": "#FFA500",
+    "selectedColor": "#f37b1d",
     "list": [
       {
         "text":"首页",
         "pagePath":"pages/index/index",
         "iconPath":"pages/icons/index.png",
-        "selectedIconPath":"pages/icons/indexSelected.png"
+        "selectedIconPath":"pages/icons/indexSel.png"
       },
       {
         "text":"橙墙",
-        "pagePath":"pages/index/index",
+        "pagePath":"pages/wall/wall",
         "iconPath":"pages/icons/wall.png",
-        "selectedIconPath":"pages/icons/wallSelected.png"
+        "selectedIconPath":"pages/icons/wallSel.png"
       },
       {
-        "text":"",
-        "pagePath":"pages/room/room",
-        "iconPath":"pages/icons/plus.png",
-        "selectedIconPath":"pages/icons/plusSelected.png"
+        "text":"发布",
+        "pagePath":"pages/publish/publish",
+        "iconPath":"pages/icons/write.png",
+        "selectedIconPath":"pages/icons/writeSel.png"
       },
       {
         "text":"消息",
-        "pagePath":"pages/index/index",
-        "iconPath":"pages/icons/message.png",
-        "selectedIconPath":"pages/icons/messageSelected.png"
+        "pagePath":"pages/message/message",
+        "iconPath":"pages/icons/sms.png",
+        "selectedIconPath":"pages/icons/smsSel.png"
       },
       {
-        "text":"我",
+        "text":"我的",
         "pagePath":"pages/me/me",
         "iconPath":"pages/icons/me.png",
-        "selectedIconPath":"pages/icons/meSelected.png",
-        "selectedColor": "#FFA500"
+        "selectedIconPath":"pages/icons/meSel.png"
       }
     ]
   },
@@ -50,13 +52,16 @@
     }
   },
   "window": {
-    "backgroundColor": "#FFA500",
+    "backgroundColor": "white",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFA500",
+    "navigationBarBackgroundColor": "#eee",
     "navigationBarTitleText": "橙知",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   },
+  
   "usingComponents": {
+    "cu-custom":"/colorui/components/cu-custom",
     "van-button": "@vant/weapp/button",
     "van-cell": "@vant/weapp/cell",
     "van-cell-group": "@vant/weapp/cell-group",
@@ -66,7 +71,10 @@
     "van-grid": "@vant/weapp/grid",
     "van-grid-item": "@vant/weapp/grid-item",
     "van-notice-bar": "@vant/weapp/notice-bar",
-    "van-image": "@vant/weapp/image"
+    "van-image": "@vant/weapp/image",
+    "van-popup": "@vant/weapp/popup",
+    "van-radio": "@vant/weapp/radio",
+    "van-radio-group": "@vant/weapp/radio-group"
     
   },
   "permission": {

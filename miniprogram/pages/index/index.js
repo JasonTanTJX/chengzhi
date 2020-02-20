@@ -1,17 +1,45 @@
 const db = wx.cloud.database();
 const todos = db.collection('todos');
-var app = getApp();
+const app = getApp();
 Page({
 
 
   data: {
     tasks:[],
     openid:'',
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    swiperList: [{
+      id: 0,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }, {
+      id: 1,
+        type: 'image',
+        url: 'https://images.t0k.xyz/defBg.jpg',
+    }, {
+      id: 2,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }, {
+      id: 3,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }, {
+      id: 4,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }, {
+      id: 5,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }, {
+      id: 6,
+      type: 'image',
+      url: 'https://images.t0k.xyz/defBg.jpg'
+    }],
   },
 
   onLoad: function () {
-
   },
   
   bindGetUserInfo: function(e) {
@@ -19,6 +47,7 @@ Page({
   },
 
   onReady: function () {
+    wx.showTabBar();
     todos.get().then(res => {
       this.setData({
         tasks:res.data
@@ -27,6 +56,7 @@ Page({
   },
   onShow: function () {
     
+ 
   },
   onReachBottom: function() {
     this.getData();

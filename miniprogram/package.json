@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "@vant/weapp": "^1.0.5",
-    "wux-weapp": "^3.8.5"
+    "@vant/weapp": "^1.0.5"
   },
   "devDependencies": {},
   "scripts": {

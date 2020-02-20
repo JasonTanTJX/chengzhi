@@ -8,7 +8,111 @@ Page({
   data: {
     nickName:'',
     avatarUrl:'',
-    czid:''
+    czid:'',
+    gender:'',
+    starCount: 0,
+    fansCount: 0,
+    followingCount: 0,
+    articleCount:0
+  },
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  options: {
+    addGlobalClass: true,
+  },
+
+  attached() {
+    console.log("success")
+    let that = this;
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true,
+    })
+    let i = 0;
+    numDH();
+    function numDH() {
+      if (i < 20) {
+        setTimeout(function () {
+          that.setData({
+            starCount: i,
+            fansCount: i,
+            followingCount: i,
+            articleCount: i
+          })
+          i++
+          numDH();
+        }, 20)
+      } else {
+        that.setData({
+          starCount: that.coutNum(3000),
+          fansCount: that.coutNum(484),
+          followingCount: that.coutNum(24000)
+        })
+      }
+    }
+    wx.hideLoading()
+  },
+
+  methods: {
+    coutNum(e) {
+      if (e > 1000 && e < 10000) {
+        e = (e / 1000).toFixed(1) + 'k'
+      }
+      if (e > 10000) {
+        e = (e / 10000).toFixed(1) + 'W'
+      }
+      return e
+    },
+    CopyLink(e) {
+      wx.setClipboardData({
+        data: e.currentTarget.dataset.link,
+        success: res => {
+          wx.showToast({
+            title: '已复制',
+            duration: 1000,
+          })
+        }
+      })
+    },
+    showModal(e) {
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    },
+    hideModal(e) {
+      this.setData({
+        modalName: null
+      })
+    },
+    showQrcode() {
+      wx.previewImage({
+        urls: ['https://image.weilanwl.com/color2.0/zanCode.jpg'],
+        current: 'https://image.weilanwl.com/color2.0/zanCode.jpg' // 当前显示图片的http链接      
+      })
+    },
+  },
+
+  onShareAppMessage() {
+    return {
+      title: '橙知',
+      imageUrl: 'cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/logo.png',
+      path: '/pages/index/index'
+    }
+  },
+
+  onMessage: function(e) {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+    console.log(e)
   },
 
   getUserInfo: function(e) {
@@ -18,27 +122,30 @@ Page({
        users.where({
           _openid : res.result.openId
         }).get().then( res => {
-          this.setData({
-            czid: "CZ："+ res.data[0].czid
-          })
-        });
-        
-        
+          if (res.data[0].czid) {
+            this.setData({
+              czid: "CZ: "+res.data[0].czid
+            })
+          }else{
+            console.error(err)
+          }
+          
+        });  
       }
     })
     
   },
 
   onPullDownRefresh:function(e) {
-      this.onLoad()
+    this.onLoad()
   },
 
   onReachBottom: function() {
-    this.getData();
+    this.getData()
   },
 
-
   onLoad: function (options) {
+    wx.setNavigationBarTitle({ title: '我的' })
      wx.showNavigationBarLoading()
       setTimeout(function() {
         wx.hideNavigationBarLoading() //完成停止加载
@@ -53,11 +160,23 @@ Page({
           //发起网络请求
           wx.getUserInfo({
             success: function(res) {
-              that.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                nickName : res.userInfo.nickName
-              })
-              wx.setNavigationBarTitle({ title: res.userInfo.nickName })
+              console.log(res.userInfo.gender)
+              if(res.userInfo.gender=='1') {
+                that.setData({
+                  avatarUrl: res.userInfo.avatarUrl,
+                  nickName : res.userInfo.nickName,
+                  gender: 'https://www.t0k.xyz/man.png'
+                })
+                
+              }else{
+                that.setData({
+                  avatarUrl: res.userInfo.avatarUrl,
+                  nickName : res.userInfo.nickName,
+                  gender: 'https://www.t0k.xyz/woman.png'
+                })
+                
+              }
+
             },
             fail(error){
               wx.navigateTo({

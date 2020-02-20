@@ -1,12 +1,16 @@
 <!--pages/login/login.wxml-->
 <view class="container">
-<van-image
+<view>
+  <van-image
   round
-  width="30rem"
-  height="30rem"
+  width="25rem"
+  height="25rem"
   src="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/logo.png"
 />
+</view>
+<view class="button">
 <van-button open-type="getUserInfo" bind:getuserinfo="getUserInfo" color="linear-gradient(to right, #FFEC8B, #FFA500)" size="large"  round type="info">朕要登录</van-button>
+</view>
 </view>
 
 

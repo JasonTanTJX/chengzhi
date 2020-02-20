@@ -1,0 +1,44 @@
+<!--pages/wall/wall.wxml-->
+<scroll-view class="bg-white page">
+	<cu-custom isCustom="{{true}}" showBack="{{false}}" bgImage="https://images.t0k.xyz/defBg.jpg">
+
+		<view slot="right">
+			<scroll-view scroll-x class="nav text-center">
+				<view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+					{{index==0?'推荐':(index==1?'关注':'校园')}}
+				</view>
+			</scroll-view>
+
+		</view>
+	</cu-custom>
+
+
+	<view wx:if="{{TabCur==0}}">
+		<view class="cu-card dynamic no-card" wx:for="{{content}}" style="border-bottom-style:solid;border-width:1px;border-color:#eee;">
+			<view class="cu-item shadow">
+				<view class="cu-list menu-avatar">
+					<view class="cu-item">
+						<view class="cu-avatar round lg" style="background-image:url({{item.avatarUrl}});"></view><view></view>
+						<view class="content flex-sub">
+							<view>{{item.nickName}}</view>
+							<view class="text-gray text-sm flex justify-between">
+								{{item.diffTime}}
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="text-content format-text">
+         {{item.content}}
+					
+        <view>
+        <text class="{{item.locName==''?'':'cuIcon-locationfill'}}"></text>
+        <text class="text-grey format-text"  style="font-size:25rpx">{{item.locName}}</text>
+        </view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view wx:if="{{TabCur==1}}" style="margin-top:30px;">
+		我是关注内容
+	</view>
+</scroll-view>

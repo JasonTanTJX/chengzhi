@@ -7,4 +7,10 @@
   justify-content: space-around;
   align-items: center;
   background-color: white;
+  position: fixed;
+}
+
+.button{
+  position: absolute;
+  bottom: 100rpx;
 }

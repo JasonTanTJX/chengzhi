@@ -1,12 +1,9 @@
 <view class="chatroom">
-  <view class="header">
-    <!-- display number of people in the room -->
+  <!-- <view class="header">
     <view class="left"></view>
-    <!-- room name -->
     <view class="middle">{{groupName}}</view>
-    <!-- reserved -->
     <view class="right"></view>
-  </view>
+  </view> -->
 
   <!-- chats -->
   <scroll-view 

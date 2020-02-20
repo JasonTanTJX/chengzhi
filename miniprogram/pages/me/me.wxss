@@ -1,13 +1,29 @@
 /* pages/me/me.wxss */
-.container{
+
+.avatar-userInfo{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  background-color: #FFA500;
+}
+.userInfoText{
+  color:white;
+}
+.gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+.message-icon{
+  top: 20px;
+  right: 160rpx;
 }
 
-.czid{
-  color:white;
-  font-size: 25rpx;
+.setting-icon{
+  position: absolute;
+  top: 150rpx;
+  right: 35rpx;
 }

@@ -20,20 +20,17 @@ Page({
   },
   selectImage: function(e) {
     wx.chooseImage({
-      complete: (res) => {
-        console.log(res.tempFilePaths[0])
-        wx.cloud.uploadFile({
-          cloudPath:`${Math.floor(Math.random()*100000)}.png`,
-          filePath:res.tempFilePaths[0]
-        }).then(res => {
-          console.log(res.fileID)
-          this.setData({
-            image:res.fileID
-          })
-        }).catch(err => {
-          console.error(err)
-        })
-      },
+      success: ret => {
+        var filePath = ret.tempFilePaths[0];
+        wx.uploadFile({
+          url: 'https://sm.ms/api/upload',
+          filePath: filePath,
+          name: 'smfile',
+          success: res => {
+            console.log('上传成功：', res);
+          }
+        });
+      }
     })
   },
   bindDateChange:function(event) {
