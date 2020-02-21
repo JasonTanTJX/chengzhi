@@ -1,6 +1,6 @@
 <scroll-view scroll-y class="scrollPage">
 
-<view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://images.t0k.xyz/defBg.jpg');height: 414rpx;"  bindtap="showModal" data-target="bottomModal">
+<view class="bg-img bg-mask padding-tb-xl " style="background-image:url(https://images.t0k.xyz/defBg.jpg);height: 414rpx;"  bindtap="showModal" data-target="bottomModal">
   
   <view class="avatar-userInfo">
     <view class="cu-avatar xl round" style="background-image:url('{{avatarUrl}}');"/>

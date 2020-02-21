@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabList:['推荐','关注','校园'],
+    tabList:['','',''],
     TabCur:0,
     scrollLeft:0,
     avatarUrl:[],
@@ -14,7 +14,17 @@ Page({
     sendTime:[],
     content:[],
     imgList: [],
-    locName:[]
+    locName:[],
+    isLoad:''
+  },
+
+  isLoading (e) {
+   var that = this;
+    setTimeout(function() {
+      that.setData({
+        isLoad: 'over'
+      })
+     },1000)
   },
 
   tabSelect(e) {
@@ -23,11 +33,15 @@ Page({
         scrollLeft: (e.currentTarget.dataset.id-1)*60 
       })
   },
-
+  showPreviewPic:function(e){
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.url],
+    })
+  },
   getPubArticles: function(e) {
     var that = this;
     wx.request({
-      url: 'https://www.t0k.xyz/selectPubArticles.php',
+      url: 'https://www.t0k.xyz/selectOpenPubArticles.php',
       method:'GET',
       header: {
         'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -42,8 +56,10 @@ Page({
   },
 
   onLoad: function (options) {
+    this.isLoading()
     this.getPubArticles()
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -77,7 +93,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onLoad()
+    wx.showToast({
+      title: '橙知中...',
+      icon:'loading'
+    })
+    setTimeout(function() {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+     },500)
   },
 
   /**

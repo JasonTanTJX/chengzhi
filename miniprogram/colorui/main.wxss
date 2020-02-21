@@ -2289,10 +2289,9 @@ button.icon.lg {
 }
 
 .cu-card.dynamic>.cu-item>.text-content {
-	padding: 0 30rpx 0;
-	max-height: 6.4em;
+	padding: 0 28rpx 0;
 	overflow: hidden;
-	font-size: 30rpx;
+	font-size: 32rpx;
 	margin-bottom: 20rpx;
 }
 
@@ -3839,7 +3838,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .text-content {
-	line-height: 1.6;
+	line-height: 1.5;
 }
 
 .text-left {

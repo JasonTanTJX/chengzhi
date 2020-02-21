@@ -10,7 +10,8 @@ Page({
    */
   data: {
     content:'',
-    imgList:'',
+    imgList:[],
+    image: [],
     location:'',
     locName:'所在位置',
     show: false,
@@ -23,7 +24,61 @@ Page({
     country:'',
     province:'',
     city:'',
-    czid:''
+    czid:'',
+    emoji:`😍-😤-😜-😝-😋-😘-😠-😩-😲-😞-😵-😰-😒-😚-😷-😳-😃-😅-😆-😁-😂-😊-☺-😄-😢-😭-😨-😣-😡-😌-😖-😔-😱-😪-😏-😓-😥-😫-😉-🙅-🙆-🙇-🙈-🙊-🙉-🙋-🙌-🙍-🙎-🙏-☀-☁-☔-⛄-⚡-🌀-🌁-🌂-🌃-🌅-🌈-✊-✋-✌-👊-👍-☝-👆-👇-👈-👉-👋-👏-👌-👎-👐-💉-💊`,
+    emojiArr:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78'],
+    emojis:[],
+    isEmoji:false,
+    emojiHeight:0,
+    footHeight:100
+  },
+
+  emojiBtn: function(e) {
+    let index = e.currentTarget.dataset.i;
+    if (this.data.content) {
+      this.setData({
+        content: this.data.content + this.data.emojis[index].char
+      })
+    } else {
+      this.setData({
+        content: this.data.emojis[index].char
+      })
+    }
+  },
+
+  showEmoji: function() {
+    var emo = {};
+    var emoChar = this.data.emoji.split('-');
+    this.data.emojiArr.forEach((val,index) => {
+      emo = {
+        char: emoChar[index],
+        emoji: val
+      }
+      this.data.emojis.push(emo);
+    })
+    this.setData({
+      emojis: this.data.emojis
+    })
+    console.log('showEmoji')
+  },
+
+  onEmoji: function() {
+    this.setData({
+      isEmoji: true,
+      emojiHeight:400,
+      footHeight:500
+    })
+    // this.showEmoji()
+    
+  },
+
+  hidEmoji: function() {
+    this.setData({
+      isEmoji: false,
+      emojiHeight:0,
+      footHeight:100
+    })
+    
   },
   
   onChange(event) {
@@ -56,34 +111,71 @@ Page({
 
   },
 
-  ChooseImage() {
+  ChooseImage: function() {
     var that = this;
+    var istip = false;
+    var Img1 = [];
     wx.chooseImage({
-      count: 4, //默认9
-      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album','camera'], //从相册或者相机选择
-      success: (res) => {
-        if (this.data.imgList.length != 0) {
-          that.setData({
-            imgList: this.data.imgList.concat(res.tempFilePaths)
-          })
-          
-        } else {
-          this.setData({
-            imgList: res.tempFilePaths
-          })
+      count: 9, // 默认9
+      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function(res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var imgSrc = res.tempFilePaths;
+        for (var i = 0; i < imgSrc.length; i++) {
+          wx.uploadFile({
+            url: 'https://images.t0k.xyz/upload.php', 
+            filePath: imgSrc[i],
+            name: 'imgfile',
+            method: 'post',
+            success: function(ress) {
+              console.log(ress.data);
+              var gottaJson = JSON.parse(ress.data);
+              var img = that.data.imgList
+              img.push(gottaJson.data);
+              that.setData({
+                imgList: img
+              })
+            },
+            fail: function(res) {
+              console.log(res);
+              console.log('接口调用失败');
+            }
+          });
         }
+        that.setData({
+          imgSrc: imgSrc,
+          istip: istip,
+        });
       }
-    });
+    })
   },
+
+  // ChooseImage() {
+  //   var that = this;
+  //   wx.chooseImage({
+  //     count: 4, //默认9
+  //     sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album','camera'], //从相册或者相机选择
+  //     success: (res) => {
+  //       var tempFilePaths = res.tempFilePaths;
+        
+  //         that.setData({
+  //           imgList: that.data.imgList.concat(tempFilePaths)
+  //         }) 
+  //     }
+  //   });
+  // },
   ViewImage(e) {
+    var that = this;
     wx.previewImage({
-      urls: this.data.imgList,
+      urls: that.data.imgList,
       current: e.currentTarget.dataset.url
     });
     
   },
   DelImg(e) {
+    var that = this;
     wx.showModal({
       title: '橙知',
       content: '确定要删除这段回忆吗？',
@@ -91,9 +183,9 @@ Page({
       confirmText: '删除',
       success: res => {
         if (res.confirm) {
-          this.data.imgList.splice(e.currentTarget.dataset.index, 1);
-          this.setData({
-            imgList: this.data.imgList
+          that.data.imgList.splice(e.currentTarget.dataset.index, 1);
+          that.setData({
+            imgList: that.data.imgList
           })
         }
       }
@@ -160,7 +252,7 @@ Page({
     // var S =  myDate.getSeconds();
     // var sendTime = `${Y}年${Mo}月${D}日 ${H}:${M}:${S}`;
     var that = this;
-    that.submitPhoto();
+    
     var locName = that.data.locName;
     if(locName=='所在位置'){
       locName='';
@@ -178,7 +270,8 @@ Page({
         gender:that.data.gender,
         country:that.data.country,
         province:that.data.province,
-        city:that.data.city
+        city:that.data.city,
+        imgList:JSON.stringify(that.data.imgList)
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -189,36 +282,8 @@ Page({
         })
       }
     })
-
-    
-      
-   
- 
    },
 
-   submitPhoto() {
-    var that = this;
-    wx.uploadFile({
-     url: 'https://images.t0k.xyz/upload.php', //仅为示例，非真实的接口地址
-     filePath: that.data.imgList,
-     name: 'imgfile',
-     success: function (res) {
-    //  var data = JSON.parse(res.data);
-     console.log(that.data.imgList);
-     //do something
-    //  if(data.code==1){
-    //   wx.showToast({
-    //   title: '成功',
-    //   icon: 'success',
-    //   duration: 1000
-    //   })
-    //  }
-     },
-     complete(err){
-       console.log(err)
-     }
-    })
-    },
 
   showPopup() {
     this.setData({ show: true });
@@ -228,24 +293,25 @@ Page({
     this.setData({ show: false });
   },
 
-  // onOpen: function(e) {
-  //   this.setData({
-  //     whom: open
-  //   })
-  //   console.log(whom)
-  // },
+  onOpen: function(e) {
+    this.setData({
+      whom: open
+    })
+    console.log(whom)
+  },
 
-  // onPrivacy: function(e) {
-  //   this.setData({
-  //     whom: privacy
-  //   })
-  //   console.log(whom)
-  // },
+  onPrivacy: function(e) {
+    this.setData({
+      whom: privacy
+    })
+    console.log(whom)
+  },
 
 
   onLoad: function (options) {
     var that = this;
     that.getUserInfo()
+
     
     wx.login({
       success : res => {

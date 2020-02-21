@@ -4,6 +4,9 @@
   height: 100%
 }
 
-.format-text{
-  word-wrap:break-word;
+.customed-text{
+  word-spacing:normal;
+  word-wrap: break-word;
+  word-break: normal;
+  white-space: pre-line;
 }
