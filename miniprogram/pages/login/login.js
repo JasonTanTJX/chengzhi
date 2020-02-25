@@ -1,17 +1,19 @@
 // pages/login/login.js
 const db = wx.cloud.database();
-const users = db.collection('users');
-
+const usersInfo = db.collection('usersInfo');
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    
+    userInfo: null
   },
 
   getUserInfo: function(e) {
-    
+
+    console.log(e)
+    var that = this;
     var myDate = new Date();
     var Y =  myDate.getFullYear();
     var Mo =  myDate.getMonth()+1;
@@ -19,66 +21,73 @@ Page({
     var H = myDate.getHours();
     var M =  myDate.getMinutes();
     var S =  myDate.getSeconds();
-    var regTime = `${Y}-${Mo}-${D} ${H}:${M}:${S}`;
+    var signTime = `${Y}-${Mo}-${D} ${H}:${M}:${S}`;
+    wx.cloud.callFunction({
+      name:'login',
+      success: res => {
+        e.detail.userInfo.openid = res.result.wxInfo.OPENID
+        app.globalData.userInfo = e.detail.userInfo
+        that.setData({
+          userInfo: e.detail.userInfo
+        })
+        wx.setStorageSync('userInfo', app.globalData.userInfo)
+       usersInfo.where({
+          _openid : res.result.wxInfo.OPENID
+        }).count().then( ress => {
+          console.log(ress.total)
+          if (ress.total == 0) {
+            usersInfo.add({
+              data:  e.detail.userInfo
+            }).then( ress => {
+
+              try{
+                wx.request({
+                  url: 'https://www.t0k.xyz/login.php',
+                  method:'POST',
+                  data: {
+                    czid: `${Math.floor(Math.random()*1000000*M*S)}`,
+                    openid: e.detail.userInfo.openid,
+                    nickName: e.detail.userInfo.nickName,
+                    avatarUrl: e.detail.userInfo.avatarUrl,
+                    gender: e.detail.userInfo.gender,
+                    country: e.detail.userInfo.country,
+                    province: e.detail.userInfo.province,
+                    city: e.detail.userInfo.city,
+                    signTime: signTime
+                  },
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded' // 默认值
+                  },
+                  success () {
+                    wx.switchTab({
+                      url: "/pages/index/index",
+                   })
+                    
+                  }
+              })
+              } catch (error) {
+  
+              }
+
+             
+            })
+          } else {
+            wx.switchTab({
+              url: "/pages/index/index",
+           })
+          }
+        });
+        
+      }
+    })
     
-    // wx.cloud.callFunction({
-    //   name:'getOpenId',
-    //   complete: res => {
-    //    users.where({
-    //       _openid : res.result.openId
-    //     }).count().then( res => {
-        
-    //       if (res.total == 0) {
-    //         users.add({
-    //            data: {
-    //             userInfo:e.detail.userInfo,
-    //             czid: `${Math.floor(Math.random()*1000000)}`*M*S,
-    //             regTime: regTime
-    //            }
-    //         }).then(
-    //           wx.switchTab({
-    //             url: "/pages/index/index",
-    //           })
-    //         ).catch( err => {
-    //            console.error(err)
-    //         })
-    //       }else{
-    //         wx.switchTab({
-    //           url: "/pages/index/index",
-    //         })
-    //       }
-    //     });
-        
-        
-    //   }
-    // })
-    console.log(e)
-    try{
-      wx.request({
-        url: 'https://users.t0k.xyz/index.php',
-        method:'POST',
-        data: {
-          id: e.detail.userInfo.nickName,
-          openid: e.detail.userInfo.province
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
-        },
-        success (res) {
-          console.log(res.data);
-        }
-      })
-    }catch(error){
-
-    }
-
+  
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    this.getUserInfo()
+   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

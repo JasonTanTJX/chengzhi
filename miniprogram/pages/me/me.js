@@ -1,13 +1,14 @@
 const db = wx.cloud.database();
 const users = db.collection('users');
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    nickName:'',
-    avatarUrl:'',
+    nickName:app.globalData.userInfo.nickName,
+    avatarUrl:app.globalData.userInfo.avatarUrl,
     czid:'',
     gender:'',
     starCount: 0,
@@ -115,26 +116,40 @@ Page({
     console.log(e)
   },
 
-  getUserInfo: function(e) {
-    wx.cloud.callFunction({
-      name:'getOpenId',
-      complete: res => {
-       users.where({
-          _openid : res.result.openId
-        }).get().then( res => {
-          if (res.data[0].czid) {
-            this.setData({
-              czid: "CZ: "+res.data[0].czid
-            })
-          }else{
-            console.error(err)
-          }
-          
-        });  
-      }
-    })
-    
+  onGender: function() {
+    if(app.globalData.userInfo.gender=='1') {
+      this.setData({
+        gender: 'https://images.t0k.xyz/man.png'
+      })
+                  
+    }else{
+      this.setData({
+        gender: 'https://www.t0k.xyz/woman.png'
+      })
+    }
   },
+
+  
+  // getUserInfo: function(e) {
+  //   wx.cloud.callFunction({
+  //     name:'getOpenId',
+  //     complete: res => {
+  //      users.where({
+  //         _openid : res.result.openId
+  //       }).get().then( res => {
+  //         if (res.data[0].czid) {
+  //           this.setData({
+  //             czid: "CZ: "+res.data[0].czid
+  //           })
+  //         }else{
+  //           console.error(err)
+  //         }
+          
+  //       });  
+  //     }
+  //   })
+    
+  // },
 
   onPullDownRefresh:function(e) {
     this.onLoad()
@@ -145,50 +160,18 @@ Page({
   },
 
   onLoad: function (options) {
+    this.onGender()
     wx.setNavigationBarTitle({ title: '我的' })
      wx.showNavigationBarLoading()
       setTimeout(function() {
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
        },500)
-    var that = this;
-    that.getUserInfo()
-  
-    wx.login({
-      success : res => {
-        if (res.code) {
-          //发起网络请求
-          wx.getUserInfo({
-            success: function(res) {
-              console.log(res.userInfo.gender)
-              if(res.userInfo.gender=='1') {
-                that.setData({
-                  avatarUrl: res.userInfo.avatarUrl,
-                  nickName : res.userInfo.nickName,
-                  gender: 'https://www.t0k.xyz/man.png'
-                })
-                
-              }else{
-                that.setData({
-                  avatarUrl: res.userInfo.avatarUrl,
-                  nickName : res.userInfo.nickName,
-                  gender: 'https://www.t0k.xyz/woman.png'
-                })
-                
-              }
+   console.log(app.globalData.userInfo)
+    
 
-            },
-            fail(error){
-              wx.navigateTo({
-                url: "/pages/login/login",
-              })
-            }
-          })
-        }else{
-          console.error(err)
-        }
-      }
-    })
+
+   
   },
 
   /**

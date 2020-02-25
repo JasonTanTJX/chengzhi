@@ -2,3 +2,100 @@
 .cu-form-group .title {
   min-width: calc(4em + 30rpx);
 }
+.footer {
+  display: flex;
+  /* justify-content: space-between; */
+  /* flex-flow: column; */
+  height: 100rpx;
+  position: fixed;
+  /* bottom: 0; */
+  width: 100%;
+  border-top: 2rpx solid #f0f0f0;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  background-color: #fff;
+  z-index: 999;
+  transition: 0.3s ease-in-out;
+  }
+  
+  .comment_bot {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  }
+  
+  .comment_input {
+  width: 400rpx;
+  height: 50rpx;
+  border: 2rpx solid #000;
+  border-radius: 50rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  text-align: left;
+  color: #000;
+  }
+  
+  .tijiao {
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: middle;
+  }
+  
+  .pinglunbtn {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  }
+  
+  .pinglunbtn::after {
+  display: inline-flex;
+  height: 100%;
+  align-self: center;
+  justify-content: center;
+  line-height: 30rpx;
+  border: none;
+  }
+  
+  /* .emoji_btn {
+  width: 50rpx;
+  height: 50rpx;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  color: transparent;
+  background-color: transparent;
+  } */
+  
+  .emoji_btn::after {
+  border: none;
+  border-radius: 0;
+  }
+  
+  /* .emoji_img {
+  width: 50rpx;
+  height: 50rpx;
+  } */
+  
+  .emoji_box {
+  width: 100%;
+  transition: 0.3s ease-in-out;
+  }
+  
+  .scro_box {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 40rpx;
+  }
+  .emoji_box {
+    width: 100%;
+    transition: 0.1s ease-in-out;
+    }
+  .char_box {
+  display: inline-block;
+  padding: 0 40rpx;
+  }

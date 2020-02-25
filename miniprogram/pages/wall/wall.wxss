@@ -10,3 +10,23 @@
   word-break: normal;
   white-space: pre-line;
 }
+
+.emoji_box {
+  width: 100%;
+  transition: 0.3s ease-in-out;
+  }
+  
+  .scro_box {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 40rpx;
+  }
+  .emoji_box {
+    width: 100%;
+    transition: 0.1s ease-in-out;
+    }
+  .char_box {
+  display: inline-block;
+  padding: 0 40rpx;
+  }

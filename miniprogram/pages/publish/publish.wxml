@@ -6,17 +6,22 @@
   </view>
   </cu-custom>
  <view class=" cu-form-group">
-		<textarea auto-focus="true" auto-height="true" style="font-size:12pt" maxlength="-1" disabled="{{modalName!=null}}" bindfocus="hidEmoji" bindinput="bindContentInput" placeholder="分享你的生活点滴..."></textarea>
+		<textarea auto-focus="true" auto-height="true" style="font-size:13pt" maxlength="-1" disabled="{{modalName!=null}}" bindfocus="hidEmoji" bindinput="bindContentInput" placeholder="分享你的生活点滴..." value="{{content}}"></textarea>
 </view>
-<!-- <button class="emojiBtn" catchtap="onEmoji"></button> -->
-<van-icon name="smile-o" size="2em" bind:click="onEmoji"/>
-<view class="showEmoji" style="height:{{emojiHeight}}rpx">
-  <scroll-view class="scroBox" scoll-y="true" enable-flex="true">
-    <block wx:for="{{emoji}}" wx:key="index">
-      <view class="charBox" catchtap="emojiBtn" data-i="{{index}}">{{index.char}}</view>
+
+
+  <van-icon style="margin-left:20rpx" name="smile-o" size="2em" bind:click="onEmoji"/>
+  <view class="emoji_box" style="height:{{emojiHeight}}rpx">
+    <scroll-view class="scro_box" scroll-top="right" scroll-y="true" enable-flex="true">
+      
+
+    <block wx:for="{{emojis}}" wx:key="index">
+      <view style="font-size:45rpx" class="char_box" catchtap="emojiBtn" data-i="{{index}}"> {{item.char}} </view>
     </block>
-  </scroll-view>
-</view>
+     
+    </scroll-view>
+  </view>
+
 
 <view>
   <van-cell is-link  title="{{locName}}" icon="location-o" bindtap="chooseLocation"/>
@@ -83,7 +88,7 @@
 	</view>
 
   <view class="bg-white text-center">
-    <button class="cu-btn round bg-green shadow" disabled="{{content==''&&imgList==''?true:false}}" bindtap="onSend">发送</button>
+    <button style="width:200rpx" class="cu-btn round bg-green shadow" disabled="{{content==''&&imgList==''?true:false}}" bindtap="onSend">完成</button>
   </view>
  
   </scroll-view>

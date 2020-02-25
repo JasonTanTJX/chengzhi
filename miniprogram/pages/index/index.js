@@ -39,7 +39,21 @@ Page({
     }],
   },
 
+  // getDomNews: function(e) {
+  //   wx.request({
+  //     url: 'https://api.avatardata.cn/GuoNeiNews/Query?key=d08679248ed3484ba1c8361b43a8dd3d&page=1&rows=10',
+  //     method:'GET',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded' // 默认值
+  //     },
+  //     success (res) {
+  //       console.log(res)
+  //     }
+  //   })
+  // },
+
   onLoad: function () {
+    // this.getDomNews()
   },
   
   bindGetUserInfo: function(e) {

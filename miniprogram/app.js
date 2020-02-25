@@ -2,6 +2,7 @@
 App({
 
   globalData: {
+    userInfo: null,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     openid: '',
     czid:'',
@@ -20,15 +21,14 @@ App({
       tmplIds: ['yNgkYWccbOv2Yl_7V1vWOEurfXeZN-FSpnXbaQe89CA'],
       success(res) {
         if (res.errMsg === 'requestSubscribeMessage:ok') {
-          wx.cloud
-            .callFunction({
+          wx.cloud.callFunction({
               name: 'subscribe',
               data: {
                 data: {
                   thing1:{
                     value: that.globalData.th1
                   },
-                  date2: {
+                  date2:{
                     value:that.globalData.d2
                   },
                   thing4:{
@@ -75,6 +75,11 @@ App({
     }
 
     this.globalData = {}
+
+    const userInfo = wx.getStorageSync('userInfo')
+    if(userInfo) {
+      this.globalData.userInfo = userInfo
+    }
 
     wx.getSystemInfo({
       success: e => {

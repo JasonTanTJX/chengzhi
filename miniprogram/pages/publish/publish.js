@@ -1,7 +1,8 @@
 // pages/publish/publish.js
 const db = wx.cloud.database();
-const users = db.collection('users');
+const usersInfo = db.collection('usersInfo');
 var app = getApp();
+
 
 Page({
   
@@ -25,12 +26,12 @@ Page({
     province:'',
     city:'',
     czid:'',
-    emoji:`😍-😤-😜-😝-😋-😘-😠-😩-😲-😞-😵-😰-😒-😚-😷-😳-😃-😅-😆-😁-😂-😊-☺-😄-😢-😭-😨-😣-😡-😌-😖-😔-😱-😪-😏-😓-😥-😫-😉-🙅-🙆-🙇-🙈-🙊-🙉-🙋-🙌-🙍-🙎-🙏-☀-☁-☔-⛄-⚡-🌀-🌁-🌂-🌃-🌅-🌈-✊-✋-✌-👊-👍-☝-👆-👇-👈-👉-👋-👏-👌-👎-👐-💉-💊`,
+    emoji:`😍-😤-😜-😝-😋-😘-😠-😩-😲-😞-😵-😰-😒-😚-😷-😳-😃-😅-😆-😁-😂-😊-😄-😢-😭-😨-😣-😡-😌-😖-😔-😱-😪-😏-😓-😥-😫-😉-👀-🙅-🙆-🙇-🙈-🙊-🙉-🙋-🙌-🙍-🙎-🙏-☀-☁-☔-⛄-⚡-🌀-🌁-🌂-🌃-🌅-🌈-✊-✋-✌-👊-👍-☝-👆-👇-👈-👉-👋-👏-👌-👎-👐-💉-💊`,
     emojiArr:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78'],
-    emojis:[],
-    isEmoji:false,
-    emojiHeight:0,
-    footHeight:100
+    emojis:[],//用作保存表情与id的数组
+    isEmoji:false,//显示与隐藏表情栏
+    emojiHeight:0,//动态改变表情框的高度
+    footHeight:100//动态改变外部容器的高度
   },
 
   emojiBtn: function(e) {
@@ -59,16 +60,15 @@ Page({
     this.setData({
       emojis: this.data.emojis
     })
-    console.log('showEmoji')
   },
 
   onEmoji: function() {
+    this.showEmoji()
     this.setData({
       isEmoji: true,
-      emojiHeight:400,
+      emojiHeight:300,
       footHeight:500
     })
-    // this.showEmoji()
     
   },
 
@@ -151,21 +151,7 @@ Page({
     })
   },
 
-  // ChooseImage() {
-  //   var that = this;
-  //   wx.chooseImage({
-  //     count: 4, //默认9
-  //     sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album','camera'], //从相册或者相机选择
-  //     success: (res) => {
-  //       var tempFilePaths = res.tempFilePaths;
-        
-  //         that.setData({
-  //           imgList: that.data.imgList.concat(tempFilePaths)
-  //         }) 
-  //     }
-  //   });
-  // },
+
   ViewImage(e) {
     var that = this;
     wx.previewImage({
@@ -223,9 +209,9 @@ Page({
   getUserInfo: function(e) {
     var that = this;
     wx.cloud.callFunction({
-      name:'getOpenId',
+      name:'login',
       complete: res => {
-       users.where({
+       usersInfo.where({
           _openid : res.result.openId
         }).get().then( res => {
           if (res.data[0].czid) {
@@ -233,7 +219,7 @@ Page({
               czid: res.data[0].czid
             })
           }else{
-            console.error(err)
+           
           }
           
         });  
@@ -243,16 +229,9 @@ Page({
   },
   
   onSend: function(event) {
-    // var myDate = new Date();
-    // var Y =  myDate.getFullYear();
-    // var Mo =  myDate.getMonth()+1;
-    // var D = myDate.getDate();
-    // var H = myDate.getHours();
-    // var M =  myDate.getMinutes();
-    // var S =  myDate.getSeconds();
-    // var sendTime = `${Y}年${Mo}月${D}日 ${H}:${M}:${S}`;
+
     var that = this;
-    
+    console.log(event)
     var locName = that.data.locName;
     if(locName=='所在位置'){
       locName='';
@@ -261,16 +240,17 @@ Page({
       url: 'https://www.t0k.xyz/addPubArticles.php',
       method:'POST',
       data: {
+        openid:app.globalData.userInfo.openid,
         czid:that.data.czid,
         content: that.data.content,
         locName: locName,
         open:that.data.open,
-        avatarUrl:that.data.avatarUrl,
-        nickName:that.data.nickName,
-        gender:that.data.gender,
-        country:that.data.country,
-        province:that.data.province,
-        city:that.data.city,
+        avatarUrl:app.globalData.userInfo.avatarUrl,
+        nickName:app.globalData.userInfo.nickName,
+        gender:app.globalData.userInfo.gender,
+        country:app.globalData.userInfo.country,
+        province:app.globalData.userInfo.province,
+        city:app.globalData.userInfo.city,
         imgList:JSON.stringify(that.data.imgList)
       },
       header: {
@@ -310,8 +290,7 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    that.getUserInfo()
-
+    that.getUserInfo() 
     
     wx.login({
       success : res => {
