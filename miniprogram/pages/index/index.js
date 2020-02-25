@@ -39,21 +39,10 @@ Page({
     }],
   },
 
-  // getDomNews: function(e) {
-  //   wx.request({
-  //     url: 'https://api.avatardata.cn/GuoNeiNews/Query?key=d08679248ed3484ba1c8361b43a8dd3d&page=1&rows=10',
-  //     method:'GET',
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded' // 默认值
-  //     },
-  //     success (res) {
-  //       console.log(res)
-  //     }
-  //   })
-  // },
+
 
   onLoad: function () {
-    // this.getDomNews()
+    wx.showTabBar()
   },
   
   bindGetUserInfo: function(e) {
@@ -62,15 +51,10 @@ Page({
 
   onReady: function () {
     wx.showTabBar();
-    todos.get().then(res => {
-      this.setData({
-        tasks:res.data
-      })
-    })
+    
   },
   onShow: function () {
-    
- 
+    // this.onLoad()
   },
   onReachBottom: function() {
     this.getData();
@@ -85,7 +69,9 @@ Page({
   },
 
   onSearch: function(e) {
-    
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
   },
 
   getData: function(callback) {

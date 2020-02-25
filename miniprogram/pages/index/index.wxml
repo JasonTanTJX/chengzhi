@@ -1,8 +1,8 @@
 <view>
   <cu-custom bgImage="https://images.t0k.xyz/defBg.jpg" >
   <view slot="right">
-   <van-search shape="round" placeholder="橙知搜索" value="{{ value }}" 
-    bindtap="onSearch" background="bg-gradual-orange"
+   <van-search shape="round" placeholder="橙知搜索"  
+    bind:focus="onSearch" background="bg-gradual-orange"
    />
   </view>
   </cu-custom>

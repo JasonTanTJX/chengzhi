@@ -8,7 +8,8 @@
     "pages/room/room",
     "pages/publish/publish",
     "pages/wall/wall",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/search/search"
   ],
   "tabBar":{
     "selectedColor": "#f37b1d",

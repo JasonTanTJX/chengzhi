@@ -11,17 +11,8 @@ Page({
   },
 
   getUserInfo: function(e) {
-
-    console.log(e)
     var that = this;
-    var myDate = new Date();
-    var Y =  myDate.getFullYear();
-    var Mo =  myDate.getMonth()+1;
-    var D = myDate.getDate();
-    var H = myDate.getHours();
-    var M =  myDate.getMinutes();
-    var S =  myDate.getSeconds();
-    var signTime = `${Y}-${Mo}-${D} ${H}:${M}:${S}`;
+
     wx.cloud.callFunction({
       name:'login',
       success: res => {
@@ -45,15 +36,13 @@ Page({
                   url: 'https://www.t0k.xyz/login.php',
                   method:'POST',
                   data: {
-                    czid: `${Math.floor(Math.random()*1000000*M*S)}`,
                     openid: e.detail.userInfo.openid,
                     nickName: e.detail.userInfo.nickName,
                     avatarUrl: e.detail.userInfo.avatarUrl,
                     gender: e.detail.userInfo.gender,
                     country: e.detail.userInfo.country,
                     province: e.detail.userInfo.province,
-                    city: e.detail.userInfo.city,
-                    signTime: signTime
+                    city: e.detail.userInfo.city
                   },
                   header: {
                     'content-type': 'application/x-www-form-urlencoded' // 默认值

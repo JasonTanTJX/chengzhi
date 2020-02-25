@@ -3,12 +3,9 @@ const users = db.collection('users');
 const app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    nickName:app.globalData.userInfo.nickName,
-    avatarUrl:app.globalData.userInfo.avatarUrl,
+    nickName:'',
+    avatarUrl:'',
     czid:'',
     gender:'',
     starCount: 0,
@@ -129,28 +126,6 @@ Page({
     }
   },
 
-  
-  // getUserInfo: function(e) {
-  //   wx.cloud.callFunction({
-  //     name:'getOpenId',
-  //     complete: res => {
-  //      users.where({
-  //         _openid : res.result.openId
-  //       }).get().then( res => {
-  //         if (res.data[0].czid) {
-  //           this.setData({
-  //             czid: "CZ: "+res.data[0].czid
-  //           })
-  //         }else{
-  //           console.error(err)
-  //         }
-          
-  //       });  
-  //     }
-  //   })
-    
-  // },
-
   onPullDownRefresh:function(e) {
     this.onLoad()
   },
@@ -160,14 +135,33 @@ Page({
   },
 
   onLoad: function (options) {
-    this.onGender()
-    wx.setNavigationBarTitle({ title: '我的' })
-     wx.showNavigationBarLoading()
-      setTimeout(function() {
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-       },500)
-   console.log(app.globalData.userInfo)
+   
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success () {
+              
+            },
+            fail () {
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            }
+          })
+        }
+      }
+    }) //获取用户信息授权
+    wx.login({
+      success: (res) => {
+        this.setData({
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          nickName: app.globalData.userInfo.nickName
+        })
+        this.onGender();
+      },
+    })
     
 
 

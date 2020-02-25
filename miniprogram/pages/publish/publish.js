@@ -21,11 +21,6 @@ Page({
     radio:'1',
     nickName:'',
     avatarUrl:'',
-    gender:'',
-    country:'',
-    province:'',
-    city:'',
-    czid:'',
     emoji:`😍-😤-😜-😝-😋-😘-😠-😩-😲-😞-😵-😰-😒-😚-😷-😳-😃-😅-😆-😁-😂-😊-😄-😢-😭-😨-😣-😡-😌-😖-😔-😱-😪-😏-😓-😥-😫-😉-👀-🙅-🙆-🙇-🙈-🙊-🙉-🙋-🙌-🙍-🙎-🙏-☀-☁-☔-⛄-⚡-🌀-🌁-🌂-🌃-🌅-🌈-✊-✋-✌-👊-👍-☝-👆-👇-👈-👉-👋-👏-👌-👎-👐-💉-💊`,
     emojiArr:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78'],
     emojis:[],//用作保存表情与id的数组
@@ -75,6 +70,7 @@ Page({
   hidEmoji: function() {
     this.setData({
       isEmoji: false,
+      emojis:[],
       emojiHeight:0,
       footHeight:100
     })
@@ -117,7 +113,7 @@ Page({
     var Img1 = [];
     wx.chooseImage({
       count: 9, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original','compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -206,27 +202,6 @@ Page({
     }
   },
 
-  getUserInfo: function(e) {
-    var that = this;
-    wx.cloud.callFunction({
-      name:'login',
-      complete: res => {
-       usersInfo.where({
-          _openid : res.result.openId
-        }).get().then( res => {
-          if (res.data[0].czid) {
-            that.setData({
-              czid: res.data[0].czid
-            })
-          }else{
-           
-          }
-          
-        });  
-      }
-    })
-    
-  },
   
   onSend: function(event) {
 
@@ -241,7 +216,6 @@ Page({
       method:'POST',
       data: {
         openid:app.globalData.userInfo.openid,
-        czid:that.data.czid,
         content: that.data.content,
         locName: locName,
         open:that.data.open,
@@ -289,34 +263,20 @@ Page({
 
 
   onLoad: function (options) {
-    var that = this;
-    that.getUserInfo() 
-    
-    wx.login({
-      success : res => {
-       
-        if (res.code) {
-          wx.getUserInfo({
-            success: function(res) {
-              
-              that.setData({
-                  avatarUrl: res.userInfo.avatarUrl,
-                  nickName : res.userInfo.nickName,
-                  gender: res.userInfo.gender,
-                  country: res.userInfo.country,
-                  province: res.userInfo.province,
-                  city: res.userInfo.city
-              })
-              
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success (res) {
+              console.log(res)
             },
-            fail(error){
+            fail () {
               wx.navigateTo({
-                url: "/pages/login/login",
+                url: '/pages/login/login',
               })
             }
           })
-        }else{
-          console.error(err)
         }
       }
     })

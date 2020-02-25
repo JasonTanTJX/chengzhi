@@ -1,91 +1,92 @@
 <scroll-view scroll-y class="scrollPage">
 
-<view class="bg-img bg-mask padding-tb-xl " style="background-image:url(https://images.t0k.xyz/defBg.jpg);height: 414rpx;"  bindtap="showModal" data-target="bottomModal">
-  
-  <view class="avatar-userInfo">
-    <view class="cu-avatar xl round" style="background-image:url('{{avatarUrl}}');"/>
-    
-    <view class="padding-xs text-xl userInfoText">
-      {{nickName}} <van-icon name="{{gender}}" size="30rpx" />
-     </view>
-    
-    <view class="padding-xs userInfoText">
-      {{czid}}
-    </view>
-  </view>
-   <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
-</view>
+	<view class="bg-img bg-mask padding-tb-xl " style="background-image:url(https://images.t0k.xyz/defBg.jpg);height: 414rpx;" bindtap="showModal" data-target="bottomModal">
+
+		<view class="avatar-userInfo">
+			<view class="cu-avatar xl round" style="background-image:url('{{avatarUrl}}');" />
+
+			<view class="padding-xs text-xl userInfoText">
+				{{nickName}}
+				<van-icon name="{{gender}}" size="30rpx" />
+			</view>
+
+			<view class="padding-xs userInfoText">
+				{{czid}}
+			</view>
+		</view>
+		<image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+	</view>
 
 
-<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white">
-      <view class="action text-green">确定</view>
-      <view class="action text-blue" bindtap="hideModal">取消</view>
-    </view>
-    <view class="padding-xl">
-      Modal 内容。
-    </view>
-  </view>
-</view>
+	<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white">
+				<view class="action text-green">确定</view>
+				<view class="action text-blue" bindtap="hideModal">取消</view>
+			</view>
+			<view class="padding-xl">
+				Modal 内容。
+			</view>
+		</view>
+	</view>
 
- 
-  <view class="padding flex text-center text-grey bg-white shadow-warp" style="margin-top:-5px;">
-  <view class="flex flex-sub flex-direction solid-right">
-      <view class="text-xxl text-orange">{{articleCount}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-attentionfill"></text>简文</view>
-    </view>
-    <view class="flex flex-sub flex-direction solid-right">
-      <view class="text-xxl text-orange">{{followingCount}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-attentionfill"></text>关注</view>
-    </view>
-    <view class="flex flex-sub flex-direction solid-right">
-      <view class="text-xxl text-blue">{{starCount}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-favorfill"></text>收藏</view>
-    </view>
-    <view class="flex flex-sub flex-direction">
-      <view class="text-xxl text-green">{{fansCount}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-fork"></text>粉丝</view>
-    </view>
-  </view>
- 
 
-  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
-    <view class="cu-item arrow">
-      <view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
-        <text class="cuIcon-github text-grey"></text>
-        <text class="text-grey">GitHub</text>
-      </view>
-    </view>
+	<view class="padding flex text-center text-grey bg-white shadow-warp" style="margin-top:-5px;">
+		<view class="flex flex-sub flex-direction solid-right">
+			<view class="text-xxl text-orange">{{articleCount}}</view>
+			<view class="margin-top-sm">
+				<text class="cuIcon-attentionfill"></text>简文</view>
+		</view>
+		<view class="flex flex-sub flex-direction solid-right">
+			<view class="text-xxl text-orange">{{followingCount}}</view>
+			<view class="margin-top-sm">
+				<text class="cuIcon-attentionfill"></text>关注</view>
+		</view>
+		<view class="flex flex-sub flex-direction solid-right">
+			<view class="text-xxl text-blue">{{starCount}}</view>
+			<view class="margin-top-sm">
+				<text class="cuIcon-favorfill"></text>收藏</view>
+		</view>
+		<view class="flex flex-sub flex-direction">
+			<view class="text-xxl text-green">{{fansCount}}</view>
+			<view class="margin-top-sm">
+				<text class="cuIcon-fork"></text>粉丝</view>
+		</view>
+	</view>
 
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/log/log" hover-class="none">
-        <text class="cuIcon-formfill text-green"></text>
-        <text class="text-grey">日志</text>
-      </navigator>
-    </view>
-    <view class="cu-item arrow">
-      <view class="content" bindtap="showQrcode">
-        <text class="cuIcon-appreciatefill text-red"></text>
-        <text class="text-grey">赞赏支持</text>
-      </view>
-    </view>
-    <view class="cu-item arrow">
-      <button class="cu-btn content" open-type="feedback">
-        <text class="cuIcon-writefill text-cyan"></text>
-        <text class="text-grey">意见反馈</text>
-      </button>
-    </view>
-    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/test/list" hover-class="none">
-        <text class="cuIcon-creativefill text-orange"></text>
-        <text class="text-grey">Bug测试</text>
-      </navigator>
-    </view>
-  </view>
-  <view class="cu-tabbar-height"></view>
+
+	<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+		<view class="cu-item arrow">
+			<view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
+				<text class="cuIcon-github text-grey"></text>
+				<text class="text-grey">GitHub</text>
+			</view>
+		</view>
+
+		<view class="cu-item arrow">
+			<navigator class="content" url="/pages/about/log/log" hover-class="none">
+				<text class="cuIcon-formfill text-green"></text>
+				<text class="text-grey">日志</text>
+			</navigator>
+		</view>
+		<view class="cu-item arrow">
+			<view class="content" bindtap="showQrcode">
+				<text class="cuIcon-appreciatefill text-red"></text>
+				<text class="text-grey">赞赏支持</text>
+			</view>
+		</view>
+		<view class="cu-item arrow">
+			<button class="cu-btn content" open-type="feedback">
+				<text class="cuIcon-writefill text-cyan"></text>
+				<text class="text-grey">意见反馈</text>
+			</button>
+		</view>
+		<view class="cu-item arrow">
+			<navigator class="content" url="/pages/about/test/list" hover-class="none">
+				<text class="cuIcon-creativefill text-orange"></text>
+				<text class="text-grey">Bug测试</text>
+			</navigator>
+		</view>
+	</view>
+	<view class="cu-tabbar-height"></view>
 </scroll-view>

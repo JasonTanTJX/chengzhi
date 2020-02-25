@@ -41,16 +41,16 @@
 				</view>
 
 				<view style="margin-bottom:40rpx">
-				<view style="margin-bottom:15px;margin-left:30rpx;margin-bottom:10rpx">
-					<text>{{item.content}}</text>
-				</view>
-				<view class="grid flex-sub padding-lr col-3 grid-square}}">
-					<view class="bg-img" style="background-image:url({{item}});" wx:for="{{item.imageList}}" wx:key="{{index}}" data-url="{{item}}" bindtap="showPreviewPic">
+					<view style="margin-bottom:15px;margin-left:30rpx;margin-bottom:10rpx">
+						<text>{{item.content}}</text>
 					</view>
-				</view>
-				<view class="{{item.locName?'text-gray text-sm text-left padding':''}}">
-					<text class="{{item.locName?'cuIcon-locationfill':''}}">{{item.locName}}</text>
-				</view>
+					<view class="grid flex-sub padding-lr col-3 grid-square}}">
+						<view class="bg-img" style="background-image:url({{item}});" wx:for="{{item.imageList}}" wx:key="{{index}}" data-url="{{item}}" bindtap="showPreviewPic">
+						</view>
+					</view>
+					<view class="{{item.locName?'text-gray text-sm text-left padding':''}}">
+						<text class="{{item.locName?'cuIcon-locationfill':''}}">{{item.locName}}</text>
+					</view>
 				</view>
 
 				<view style="margin-left:30rpx;margin-bottom:5rpx" wx:for="{{content}}" wx:if="{{itemName.comment_id==item.content_id}}" wx:for-index="idx" wx:for-item="itemName">
@@ -58,7 +58,7 @@
 				</view>
 
 				<view wx:if="{{item.comment_id==''}}" class="cu-form-group">
-					<van-icon style="margin-left:5rpx;margin-right:5rpx" name="smile-o" size="1.5em" bind:click="onEmoji" data-currentComment="{{index}}"/>
+					<van-icon style="margin-left:5rpx;margin-right:5rpx" name="smile-o" size="1.5em" bind:click="onEmoji" data-currentComment="{{index}}" />
 
 
 					<input placeholder="橙言" value="{{ index==currentComment?userComment:''}}" bindinput="bindCommentInput" data-currentComment="{{index}}" bindfocus="hidEmoji"></input>
@@ -76,7 +76,7 @@
 					</scroll-view>
 				</view>
 
-			
+
 
 			</view>
 

@@ -1953,12 +1953,12 @@ button.icon.lg {
 	transform-origin: 0 0;
 	pointer-events: none;
 	box-sizing: border-box;
-	border: 1rpx solid var(--white);
+	/* border:1rpx solid var(--white); */
 	opacity: 0.5;
 }
 
 .cu-custom .cu-bar .border-custom::before {
-	content: " ";
+	/* content: " "; */
 	width: 1rpx;
 	height: 110%;
 	position: absolute;
