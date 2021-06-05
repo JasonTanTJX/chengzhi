@@ -1,0 +1,26 @@
+  <cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  
+    <view slot="content">
+      发现世界
+    </view>
+  
+  </cu-custom>
+
+<scroll-view class="bg-white page" scroll-y="true">
+        <view class="cu-card article no-card" wx:for="{{travel}}" style="border-bottom-style:solid;border-width:1px;border-color:#eee;">
+          <view class="cu-item shadow">
+            <view class="title">
+              <view class="text-cut">{{item.title}}</view>
+            </view>
+            <view class="content">
+              <image src="{{item.imgsrc}}" mode="aspectFill"></image>
+              <view class="desc">
+                <view>
+
+                  <view class="cu-tag bg-green light sm round">{{item.source}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>

@@ -1,0 +1,61 @@
+<cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="right">
+    <van-search background="bg-white" shape="round" value="{{ value }}" placeholder="输入ISBN书号" use-action-slot bind:search="onBook" bind:change="onChange" bind:clear="onClear">
+      <view slot="action" bind:tap="onBook">查询</view>
+    </van-search>
+  </view>
+</cu-custom>
+
+<scroll-view class="bg-white page" scroll-y="true">
+  <view class="bg-cyan"><van-button custom-style="width:47%;height:60rpx;margin-left:90rpx;margin-top:20rpx;margin-bottom:20rpx" bind:click="scan" color="linear-gradient(to right, #FFEC8B, #FFA500)" size="normal"  round type="info">扫描ISBN码</van-button></view>
+  <view class="cu-card article no-card" style="margin:30rpx">
+    <view class="cu-item shadow">
+      <view class="title">
+        <view wx:if="{{display}}" class="text" style="font-size: larger">{{bookresult.title}}</view>
+        <view wx:if="{{errormsg}}" class="text">{{msg}}</view>
+      </view>
+      <view>
+        <view class="desc">
+        <image style="width:50%;margin-bottom:10rpx" wx:if="{{display}}" src="{{bookresult.image}}"></image>
+          <view wx:if="{{display}}" class="text">
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+            <text style="display:block">作者：{{bookresult.author[0]}}</text>   
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">出版社：{{bookresult.publisher}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">副标题：{{bookresult.subtitle}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">出版日期：{{bookresult.pubdate}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">页数：{{bookresult.pages}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx;">
+          <text style="display:block">定价：{{bookresult.price}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">装帧：{{bookresult.binding}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-cyan light lg round" style="margin-left:0;margin-bottom:10rpx">
+          <text style="display:block">ISBN：{{bookresult.isbn13}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-red light lg round" style="margin-left:0;margin-bottom:10rpx">
+            <text style="display:block">评分：{{bookresult.rating.average}}</text>
+          </view>
+          <view wx:if="{{display}}" class="cu-tag bg-red light lg round" style="margin-left:0;margin-bottom:10rpx">
+            <text style="display:block">评价人数：{{bookresult.rating.numRaters}}</text>
+          </view>
+            <text style="font-size: larger; color: green">\n内容简介......\n</text>
+            <text>{{bookresult.summary}}\n</text>
+            <text style="font-size: larger; color: green">作者简介......\n</text>
+            <text>{{bookresult.author_intro}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

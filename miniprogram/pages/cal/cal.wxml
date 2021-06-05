@@ -1,0 +1,29 @@
+<cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="right">
+  </view>
+</cu-custom>
+<scroll-view class="page">
+
+  <view class="cu-timeline" style="text-align:center">
+    <view wx:if="{{isShow}}" class="cu-item cur cuIcon-noticefill">
+    <view class="content bg-green shadow-blur">
+      <text>{{date}}</text>
+    </view>
+  </view>
+    <van-button custom-style="margin:20rpx 20rpx" open-type="getUserInfo" bind:click="btnClick" color="linear-gradient(to right, #FFEC8B, #FFA500)" size="normal" round type="info">预约提醒</van-button>
+  </view>
+
+
+  <yycalendar 
+    show='{{isShow}}' 
+    beginTime="{{beginTime}}" 
+    endTime="{{endTime}}" 
+    timeGap="{{timeGap}}" 
+    themeColor="{{themeColor}}" 
+    showOverdue="{{showOverdue}}" 
+    calendarType="{{calendarType}}" 
+    bind:yybindchange="_yybindchange" 
+    bind:yybindhide="_yybindhide"/>
+
+</scroll-view>

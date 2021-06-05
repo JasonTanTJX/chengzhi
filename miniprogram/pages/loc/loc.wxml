@@ -1,0 +1,37 @@
+  <cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText"/>
+  <view slot="right">
+     <van-search
+  bind:focus="bindInput"
+  background="bg-white"
+  shape="round"
+  value="{{ value }}"
+  placeholder="周边POI地点检索"
+  use-action-sloth 
+>
+</van-search>
+  </view>
+  </cu-custom>
+
+
+<view class="map_container">
+<view class="mymap_text">
+  <text class="h2">当前位置名称：{{myMarker.name}}\n当前位置描述：{{myMarker.desc}}</text>
+</view>
+  <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" show-compass="true" markers="{{markers}}" bindmarkertap="makertap">
+  </map>
+  
+</view>
+<view class="map_text">
+  <text class="h1">{{textData.name}}</text>
+  <text>{{textData.desc}}</text>
+</view>
+
+ 
+
+
+
+
+
+
+

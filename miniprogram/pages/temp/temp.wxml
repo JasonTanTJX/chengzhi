@@ -1,0 +1,8 @@
+<cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="right">
+  </view>
+</cu-custom>
+<scroll-view class="page">
+<text>受疫情影响，暂停该服务，敬请期待！</text>
+</scroll-view>

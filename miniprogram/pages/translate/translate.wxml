@@ -1,0 +1,19 @@
+<cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="right">
+    <van-search background="bg-white" shape="round" value="{{ value }}" placeholder="橙知多语种翻译" use-action-slot bind:search="onTranslate" bind:change="onChange" bind:clear="onClear">
+      <view slot="action" bind:tap="onTranslate">搜索</view>
+    </van-search>
+  </view>
+</cu-custom>
+
+<scroll-view class="page">
+  <van-notice-bar color="#f37b1d" left-icon="//img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png" text="！！温馨提示：不同段落请分开翻译！！橙知多语种在线翻译成中文含英语、粤语、文言文、日语、韩语、法语、西班牙语、泰语、阿拉伯语、俄语、葡萄牙语、德语、意大利语、希腊语、荷兰语、波兰语、保加利亚语、爱沙尼亚语、丹麦语、芬兰语、捷克语、罗马尼亚语、斯洛文尼亚语、瑞典语、匈牙利语、繁体中文、越南语等27种语言现已上线，欢迎用户体验和建议！！"
+  />
+  <view>
+    <text maxlength="{{-1}}" selectable="{{true}}" style="font-size:14pt">{{resource}}</text>
+  </view>
+  <view>
+    <text maxlength="{{-1}}" selectable="{{true}}" style="font-size:14pt">{{transresult}}</text>
+  </view>
+</scroll-view>

@@ -1,0 +1,19 @@
+  <cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText"/>
+  <view slot="right">
+     <van-search
+  bind:focus="bindInput"
+  background="bg-white"
+  shape="round"
+  value="{{ value }}"
+  placeholder="输入地点关键字"
+  use-action-slot
+  bind:change="onChange"
+>
+</van-search>
+  </view>
+  </cu-custom>
+
+<view bindtouchstart="bindSearch" data-keywords="{{i.name}}" class="text_box" wx:for="{{tips}}" wx:for-item="i">
+  {{i.name}}
+</view>

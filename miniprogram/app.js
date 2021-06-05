@@ -1,10 +1,11 @@
 //app.js
-App({
-
+App(
+  {
   globalData: {
     userInfo: null,
+    detail:[],
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
-    openid: '',
+    openid: null,
     czid:'',
     th1:'',
     d2:'',
@@ -12,8 +13,6 @@ App({
     th5:'',
     page:''
   },
-
-
 
   onSubscribe: function(e) {
     var that = this;
@@ -76,9 +75,11 @@ App({
 
     this.globalData = {}
 
-    const userInfo = wx.getStorageSync('userInfo')
+    const userInfo = wx.getStorageSync('userInfo');
+    const openid = wx.getStorageSync('openid')
     if(userInfo) {
-      this.globalData.userInfo = userInfo
+      this.globalData.userInfo = userInfo;
+      this.globalData.openid = openid
     }
 
     wx.getSystemInfo({

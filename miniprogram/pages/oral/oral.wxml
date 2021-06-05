@@ -1,0 +1,7 @@
+<cu-custom bgColor="0" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="right">
+  </view>
+</cu-custom>
+
+

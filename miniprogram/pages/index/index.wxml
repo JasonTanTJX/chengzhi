@@ -1,115 +1,77 @@
 <view>
-  <cu-custom bgImage="https://images.t0k.xyz/defBg.jpg" >
-  <view slot="right">
-   <van-search shape="round" placeholder="橙知搜索"  
-    bind:focus="onSearch" background="bg-gradual-orange"
-   />
-  </view>
-  </cu-custom>
-
-<van-notice-bar color="#f37b1d"
-  left-icon="//img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
-  text="欢迎各位体验官对橙知提出宝贵意见，我们将不断完善致力于给您提供更好的服务。"
-/>
-
-<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{swiperList}}" wx:key>
-    <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-    <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
-  </swiper-item>
-</swiper>
-
- 
-
-
-<van-grid clickable column-num="5" border="{{ false }}">
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/selfbetter.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="自我进阶"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/volunteer.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="公益志愿"
-  />
-    <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/society.png"
-    link-type="navigateTo"
-    url="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/society.png"
-    text="社会实践"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/world.png"
-    link-type="reLaunch"
-    url="/pages/dashboard/index"
-    text="发现世界"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/book.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="良书益友"
-  />
-</van-grid>
-<van-grid clickable column-num="5" border="{{ false }}">
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/fitness.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="健身达人"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/food.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="美食侦探"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/study.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="游学体验"
-  />
-    <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/strategy.png"
-    link-type="reLaunch"
-    url="//m.ctrip.com/webapp/you/travels/100008/3898849.html?allianceid=1039214&sid=1682165&twojumpwakeup=1&sepopup=126"
-    text="旅行攻略"
-  />
-  <van-grid-item
-    icon="cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/visa.png"
-    link-type="navigateTo"
-    url="/pages/dashboard/index"
-    text="签证护照"
-  />
-</van-grid>
-
-
-<view class="cu-card article no-card margin-top">
-  <view class="cu-item shadow">
-    <view class="title">
-      <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
+  <cu-custom bgImage="https://images.tanyang.asia/indexSwiperListImg/1.jpg">
+    <view slot="right">
+      <van-search shape="round" placeholder="橙知多语种翻译" bind:focus="onTranslate" background="bg-white" />
     </view>
-    <view class="content">
-      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-      <view class="desc">
-        <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-        <view>
-          <view class="cu-tag bg-red light sm round">正义天使</view>
-          <view class="cu-tag bg-green light sm round">史诗</view>
-        </view>
+    <view slot="right">
+      <weather size="xs" theme="light" bgcolor="0" />
+    </view>
+  </cu-custom>
+  <van-notice-bar color="#f37b1d" custom-style="display: inline-block"
+    left-icon="//img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
+    text="#欢迎各位体验官对橙知提出宝贵意见，我们将不断完善致力于给您提供更好的服务。#" />
+
+  <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true"
+    autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover"
+        wx:if="{{item.type=='video'}}"></video>
+    </swiper-item>
+  </swiper>
+
+  <!-- <van-grid clickable column-num="5" border="{{ false }}">
+    <van-grid-item icon="https://www.tanyang.asia/icon/selfbetter.png" link-type="navigateTo" url="/pages/cal/cal" text="自我进阶" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/volunteer.png" link-type="navigateTo" url="/pages/temp/temp" text="公益志愿" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/society.png" link-type="navigateTo" url="/pages/temp/temp" text="社会实践" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/world.png" link-type="navigateTo" url="/pages/temp/temp" text="发现世界" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/book.png" link-type="navigateTo" url="/pages/book/book" text="良书益友" />
+  </van-grid>
+  <van-grid clickable column-num="5" border="{{ false }}">
+    <van-grid-item icon="https://www.tanyang.asia/icon/fitness.png" link-type="navigateTo" url="/pages/temp/temp" text="健身达人" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/food.png" link-type="navigateTo" url="/pages/loc/loc" text="本地侦探" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/oral.png" link-type="navigateTo" url="/pages/oral/oral" text="玩转口语" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/strategy.png" link-type="navigateTo" url="/pages/temp/temp" text="旅行攻略" />
+    <van-grid-item icon="https://www.tanyang.asia/icon/visa.png" link-type="navigateTo" url="/pages/temp/temp" text="签证护照" />
+  </van-grid> -->
+
+  <view style="margin-top:20rpx" class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 实时提醒
+    </view>
+  </view>
+  <view class="cu-timeline">
+    <view class="cu-item text-blue">
+      <weather size="sm" theme="light" bgcolor="#0081ff" />
+    </view>
+    <view class="cu-item text-pink">
+      <span class="togetherDays">兰兰</span> 和 <span class="togetherDays">俊翔 </span>在一起的<span class="togetherDays">
+        {{togetherDays}}
+      </span>天！
+    </view>
+    <view class="cu-item text-blue">
+      与宝贝相遇的<span class="encounterDays"> {{encounterDays}} </span>天啦！
+    </view>
+  </view>
+
+  <view style="margin-top:20rpx" class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 历史上的{{currentDate}}
+    </view>
+  </view>
+
+  <view class="cu-timeline" wx:for="{{today}}">
+    <view class="cu-item text-cyan">
+      <view class="bg-cyan content">
+        <text> {{item.year}}年</text> {{item.title}}
       </view>
     </view>
   </view>
+
+
+
+
+
+
+
 </view>
-
- 
-
-
-</view>
-
-
-

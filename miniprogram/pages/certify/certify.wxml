@@ -1,0 +1,27 @@
+<cu-custom bgColor="bg-cyan" isBack="{{true}}">
+  <view slot="backText" />
+  <view slot="content">个人信息认证</view>
+</cu-custom>
+<scroll-view>
+  <ocr-navigator bind:onSuccess="onSuccess" certificateType="idCard" opposite="{{false}}">
+    <text>身份证正面</text>
+    <image style="width:100%" src="{{image_path1}}"></image>
+  </ocr-navigator>
+  <ocr-navigator bind:onSuccess="onSuccessB" certificateType="idCard" opposite="{{true}}">
+    <text>身份证反面</text>
+    <image style="width:100%" src="{{image_path0}}"></image>
+  </ocr-navigator>
+
+  <van-cell-group>
+    <van-field value="{{name}}" label="姓名" left-icon="contact" disabled border="{{ false }}" />
+    <van-field value="{{gender}}" label="性别" left-icon="contact" disabled border="{{ false }}" />
+    <van-field value="{{nationality}}" label="民族" left-icon="friends-o" disabled border="{{ false }}" />
+    <van-field value="{{birthday}}" label="出生日期" left-icon="clock-o" disabled border="{{ false }}" />
+    <van-field value="{{address}}" type="textarea" label="住址" autosize left-icon="location-o" disabled border="{{ false }}" />
+    <van-field value="{{id}}" label="公民身份号码" left-icon="user-circle-o" disabled border="{{ false }}" />
+    <van-field value="{{valid_date}}" label="有效期限" left-icon="underway-o" disabled border="{{ false }}" />
+  </van-cell-group>
+    <view class="bg-white text-center">
+    <button style="width:200rpx" class="cu-btn round bg-green shadow" disabled="{{name==''}}" bindtap="onSubmit">提交</button>
+  </view>
+</scroll-view>

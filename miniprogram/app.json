@@ -1,68 +1,63 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addTodo/addTodo",
-    "pages/todoInfo/todoInfo",
     "pages/me/me",
     "pages/login/login",
-    "pages/room/room",
-    "pages/publish/publish",
-    "pages/wall/wall",
-    "pages/message/message",
-    "pages/search/search"
+    "pages/translate/translate",
+    "pages/detail/detail",
+    "pages/book/book",
+    "pages/loc/loc",
+    "pages/inputtips/input",
+    "pages/cal/cal",
+    "pages/temp/temp",
+    "pages/oral/oral",
+    "pages/certify/certify"
   ],
-  "tabBar":{
+  "tabBar": {
     "selectedColor": "#f37b1d",
     "list": [
       {
-        "text":"首页",
-        "pagePath":"pages/index/index",
-        "iconPath":"pages/icons/index.png",
-        "selectedIconPath":"pages/icons/indexSel.png"
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/icons/index.png",
+        "selectedIconPath": "pages/icons/indexSel.png"
       },
       {
-        "text":"橙墙",
-        "pagePath":"pages/wall/wall",
-        "iconPath":"pages/icons/wall.png",
-        "selectedIconPath":"pages/icons/wallSel.png"
-      },
-      {
-        "text":"发布",
-        "pagePath":"pages/publish/publish",
-        "iconPath":"pages/icons/write.png",
-        "selectedIconPath":"pages/icons/writeSel.png"
-      },
-      {
-        "text":"消息",
-        "pagePath":"pages/message/message",
-        "iconPath":"pages/icons/sms.png",
-        "selectedIconPath":"pages/icons/smsSel.png"
-      },
-      {
-        "text":"我的",
-        "pagePath":"pages/me/me",
-        "iconPath":"pages/icons/me.png",
-        "selectedIconPath":"pages/icons/meSel.png"
+        "text": "我的",
+        "pagePath": "pages/me/me",
+        "iconPath": "pages/icons/me.png",
+        "selectedIconPath": "pages/icons/meSel.png"
       }
     ]
   },
   "plugins": {
     "ocr-plugin": {
-      "version": "3.0.1",
+      "version": "3.0.3",
       "provider": "wx4418e3e031e551be"
+    },
+    "weather": {
+      "version": "1.0.3",
+      "provider": "wxc5af96529fe97d4b"
+    },
+    "myPlugin": {
+      "version": "2.2.0",
+      "provider": "wx6b6cb15df2836ebe"
+    },
+    "wky": {
+      "version": "1.0.5",
+      "provider": "wx4f5b2bbe1002f9b1"
     }
   },
   "window": {
-    "backgroundColor": "white",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#eee",
     "navigationBarTitleText": "橙知",
     "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },
-  
   "usingComponents": {
-    "cu-custom":"/colorui/components/cu-custom",
+    "weather": "plugin://weather/weather",
+    "cu-custom": "/colorui/components/cu-custom",
     "van-button": "@vant/weapp/button",
     "van-cell": "@vant/weapp/cell",
     "van-cell-group": "@vant/weapp/cell-group",
@@ -75,12 +70,12 @@
     "van-image": "@vant/weapp/image",
     "van-popup": "@vant/weapp/popup",
     "van-radio": "@vant/weapp/radio",
-    "van-radio-group": "@vant/weapp/radio-group"
-    
+    "van-radio-group": "@vant/weapp/radio-group",
+    "van-uploader": "@vant/weapp/uploader"
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于任务的设定" 
+      "desc": "你的位置信息将用于所需功能"
     }
   },
   "sitemapLocation": "sitemap.json",

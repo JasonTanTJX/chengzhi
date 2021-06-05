@@ -1,12 +1,12 @@
 <!--pages/publish/publish.wxml-->
 <scroll-view scroll-y class="scrollPage bg-white">
-  <cu-custom isCustom="{{true}}" showBack="{{false}}" bgImage="https://images.t0k.xyz/defBg.jpg" >
+  <cu-custom isCustom="{{true}}" showBack="{{false}}" bgImage="https://www.t0k.xyz/icon/defBg.jpg" >
   <view slot="content">
-    发简文
+    笔记
   </view>
   </cu-custom>
  <view class=" cu-form-group">
-		<textarea auto-focus="true" auto-height="true" style="font-size:13pt" maxlength="-1" disabled="{{modalName!=null}}" bindfocus="hidEmoji" bindinput="bindContentInput" placeholder="分享你的生活点滴..." value="{{content}}"></textarea>
+		<textarea auto-focus="true" auto-height="true" style="font-size:13pt" maxlength="-1" disabled="{{modalName!=null}}" bindfocus="hidEmoji" bindinput="bindContentInput" placeholder="记个笔记..." value="{{content}}"></textarea>
 </view>
 
 
@@ -25,7 +25,7 @@
 
 <view>
   <van-cell is-link  title="{{locName}}" icon="location-o" bindtap="chooseLocation"/>
-  <van-cell icon="contact" title="谁可以看" is-link value="{{whom}}" bind:click="showPopup" />
+  <!-- <van-cell icon="contact" title="谁可以看" is-link value="{{whom}}" bind:click="showPopup" />
   <van-popup
   show="{{ show }}"
   round
@@ -61,9 +61,9 @@
     >
       <van-radio slot="right-icon" name="3" />
     </van-cell>
-  </van-cell-group>
-</van-radio-group>
-</van-popup>
+  </van-cell-group> -->
+<!-- </van-radio-group>
+</van-popup> -->
 </view>
 	<view class="cu-bar bg-white">
 		<view class="action">

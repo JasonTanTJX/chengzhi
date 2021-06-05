@@ -7,34 +7,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: null
+    userInfo: null,
+    openid: null
   },
 
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     var that = this;
 
     wx.cloud.callFunction({
-      name:'login',
+      name: 'login',
       success: res => {
         e.detail.userInfo.openid = res.result.wxInfo.OPENID
         app.globalData.userInfo = e.detail.userInfo
+        app.globalData.openid = e.detail.userInfo.openid
         that.setData({
-          userInfo: e.detail.userInfo
+          userInfo: e.detail.userInfo,
+          openid: e.detail.userInfo.openid
         })
+        console.log(that.data.openid)
         wx.setStorageSync('userInfo', app.globalData.userInfo)
-       usersInfo.where({
-          _openid : res.result.wxInfo.OPENID
-        }).count().then( ress => {
+        wx.setStorageSync('openid', app.globalData.openid)
+        usersInfo.where({
+          _openid: res.result.wxInfo.OPENID
+        }).count().then(ress => {
           console.log(ress.total)
           if (ress.total == 0) {
             usersInfo.add({
-              data:  e.detail.userInfo
-            }).then( ress => {
+              data: e.detail.userInfo
+            }).then(ress => {
 
-              try{
+              try {
                 wx.request({
-                  url: 'https://www.t0k.xyz/login.php',
-                  method:'POST',
+                  url: 'https://www.tanyang.asia/api/login.php',
+                  method: 'POST',
                   data: {
                     openid: e.detail.userInfo.openid,
                     nickName: e.detail.userInfo.nickName,
@@ -47,36 +52,42 @@ Page({
                   header: {
                     'content-type': 'application/x-www-form-urlencoded' // 默认值
                   },
-                  success () {
+                  success() {
                     wx.switchTab({
                       url: "/pages/index/index",
-                   })
-                    
+                    })
+
                   }
-              })
+                })
               } catch (error) {
-  
+
               }
 
-             
+
             })
           } else {
             wx.switchTab({
               url: "/pages/index/index",
-           })
+            })
           }
         });
-        
+
       }
     })
-    
-  
+
+
+  },
+
+  onRefuse: function () {
+    wx.switchTab({
+      url: "/pages/index/index",
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

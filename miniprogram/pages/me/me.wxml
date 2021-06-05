@@ -1,92 +1,66 @@
 <scroll-view scroll-y class="scrollPage">
 
-	<view class="bg-img bg-mask padding-tb-xl " style="background-image:url(https://images.t0k.xyz/defBg.jpg);height: 414rpx;" bindtap="showModal" data-target="bottomModal">
+  <view class="bg-img bg-mask padding-tb-xl "
+    style="background-image:url(https://images.tanyang.asia/defBg.jpg);height: 500rpx;position:relative">
 
-		<view class="avatar-userInfo">
-			<view class="cu-avatar xl round" style="background-image:url('{{avatarUrl}}');" />
+    <view class="avatar-userInfo">
+      <view class="cu-avatar xl round" style="margin-top:60rpx;padding:0;background-image:url('{{avatarUrl}}');" />
 
-			<view class="padding-xs text-xl userInfoText">
-				{{nickName}}
-				<van-icon name="{{gender}}" size="30rpx" />
-			</view>
+      <view class="padding-xs text-xl userInfoText">
+        {{nickName}}
+        <van-icon name="{{gender}}" size="30rpx" />
+      </view>
 
-			<view class="padding-xs userInfoText">
-				{{czid}}
-			</view>
-		</view>
-		<image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
-	</view>
+      <view class="padding-xs userInfoText">
+        {{czid}}
+      </view>
+
+      <view class="cu-capsule round">
+        <view class="cu-tag bg-yellow">
+          <van-icon custom-style="margin:0;padding:0" name="https://www.tanyang.asia/icon/orange.svg" size="50rpx" />
+        </view>
+        <view class="cu-tag line-yellow" style="font-size:30rpx">
+          {{rewardPoints}}
+        </view>
+      </view>
+
+      <view style="margin-top:30rpx">
+        <van-button wx:if="{{display}}" custom-style="display:none" bind:click="onLogin" custom-style="width:160rpx"
+          color="linear-gradient(to right, #FFEC8B, #FFA500)" size="small" round type="info">注册/登录</van-button>
+      </view>
+
+    </view>
+  </view>
+
+  <view wx:if="{{!display}}" class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text>上传图片
+    </view>
+
+    <!-- <view wx:if="{{certified}}" class="cu-capsule round">
+      <view class="cu-tag bg-yellow ">
+        <van-icon custom-style="margin:0;padding:0" name="https://www.tanyang.asia/icon/orange.svg" size="40rpx" />
+      </view>
+      <view class="cu-tag line-yellow">
+        +100
+      </view>
+    </view>
+     <view wx:if="{{!certified}}" class="cu-tag round bg-gray" style="margin-right:40rpx">已完成</view>
+
+    <van-button wx:if="{{certified}}" bind:click="onCertify" custom-style="margin-right:40rpx;width:160rpx" color="#1cbbb4" size="small" round type="info">去认证</van-button> -->
+  </view>
+  <van-uploader after-read="afterRead"></van-uploader>
+  <!-- <view class="cu-card case no-card">
+    <view class="cu-item shadow">
+      <view class="image">
+        <image src="https://images.tanyang.asia/campus_sam.jpg" mode="widthFix"></image>
+        <view class="cu-tag bg-cyan">高校学生认证</view>
+        <view class="cu-bar bg-shadeBottom">
+          <text class="text">专注服务高校学生，实名认证即可畅享专属服务。</text>
+        </view>
+      </view>
+    </view>
+  </view> -->
 
 
-	<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
-		<view class="cu-dialog">
-			<view class="cu-bar bg-white">
-				<view class="action text-green">确定</view>
-				<view class="action text-blue" bindtap="hideModal">取消</view>
-			</view>
-			<view class="padding-xl">
-				Modal 内容。
-			</view>
-		</view>
-	</view>
-
-
-	<view class="padding flex text-center text-grey bg-white shadow-warp" style="margin-top:-5px;">
-		<view class="flex flex-sub flex-direction solid-right">
-			<view class="text-xxl text-orange">{{articleCount}}</view>
-			<view class="margin-top-sm">
-				<text class="cuIcon-attentionfill"></text>简文</view>
-		</view>
-		<view class="flex flex-sub flex-direction solid-right">
-			<view class="text-xxl text-orange">{{followingCount}}</view>
-			<view class="margin-top-sm">
-				<text class="cuIcon-attentionfill"></text>关注</view>
-		</view>
-		<view class="flex flex-sub flex-direction solid-right">
-			<view class="text-xxl text-blue">{{starCount}}</view>
-			<view class="margin-top-sm">
-				<text class="cuIcon-favorfill"></text>收藏</view>
-		</view>
-		<view class="flex flex-sub flex-direction">
-			<view class="text-xxl text-green">{{fansCount}}</view>
-			<view class="margin-top-sm">
-				<text class="cuIcon-fork"></text>粉丝</view>
-		</view>
-	</view>
-
-
-	<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
-		<view class="cu-item arrow">
-			<view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
-				<text class="cuIcon-github text-grey"></text>
-				<text class="text-grey">GitHub</text>
-			</view>
-		</view>
-
-		<view class="cu-item arrow">
-			<navigator class="content" url="/pages/about/log/log" hover-class="none">
-				<text class="cuIcon-formfill text-green"></text>
-				<text class="text-grey">日志</text>
-			</navigator>
-		</view>
-		<view class="cu-item arrow">
-			<view class="content" bindtap="showQrcode">
-				<text class="cuIcon-appreciatefill text-red"></text>
-				<text class="text-grey">赞赏支持</text>
-			</view>
-		</view>
-		<view class="cu-item arrow">
-			<button class="cu-btn content" open-type="feedback">
-				<text class="cuIcon-writefill text-cyan"></text>
-				<text class="text-grey">意见反馈</text>
-			</button>
-		</view>
-		<view class="cu-item arrow">
-			<navigator class="content" url="/pages/about/test/list" hover-class="none">
-				<text class="cuIcon-creativefill text-orange"></text>
-				<text class="text-grey">Bug测试</text>
-			</navigator>
-		</view>
-	</view>
-	<view class="cu-tabbar-height"></view>
 </scroll-view>

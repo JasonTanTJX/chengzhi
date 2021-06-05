@@ -4,14 +4,15 @@ const app = getApp();
 Page({
 
   data: {
-    nickName:'',
-    avatarUrl:'',
-    czid:'',
-    gender:'',
-    starCount: 0,
-    fansCount: 0,
-    followingCount: 0,
-    articleCount:0
+    display: '',
+    certified: '',
+    nickName: '',
+    avatarUrl: '',
+    openid: '',
+    czid: '',
+    gender: '',
+    genderIndex: '',
+    rewardPoints: 0
   },
   showModal(e) {
     this.setData({
@@ -36,6 +37,7 @@ Page({
     })
     let i = 0;
     numDH();
+
     function numDH() {
       if (i < 20) {
         setTimeout(function () {
@@ -59,113 +61,99 @@ Page({
     wx.hideLoading()
   },
 
-  methods: {
-    coutNum(e) {
-      if (e > 1000 && e < 10000) {
-        e = (e / 1000).toFixed(1) + 'k'
-      }
-      if (e > 10000) {
-        e = (e / 10000).toFixed(1) + 'W'
-      }
-      return e
-    },
-    CopyLink(e) {
-      wx.setClipboardData({
-        data: e.currentTarget.dataset.link,
-        success: res => {
-          wx.showToast({
-            title: '已复制',
-            duration: 1000,
-          })
-        }
-      })
-    },
-    showModal(e) {
-      this.setData({
-        modalName: e.currentTarget.dataset.target
-      })
-    },
-    hideModal(e) {
-      this.setData({
-        modalName: null
-      })
-    },
-    showQrcode() {
-      wx.previewImage({
-        urls: ['https://image.weilanwl.com/color2.0/zanCode.jpg'],
-        current: 'https://image.weilanwl.com/color2.0/zanCode.jpg' // 当前显示图片的http链接      
-      })
-    },
-  },
 
-  onShareAppMessage() {
-    return {
-      title: '橙知',
-      imageUrl: 'cloud://chengzhi-tc.6368-chengzhi-tc-1259737814/icons/logo.png',
-      path: '/pages/index/index'
-    }
-  },
-
-  onMessage: function(e) {
-    wx.switchTab({
-      url: '/pages/index/index',
-    })
-    console.log(e)
-  },
-
-  onGender: function() {
-    if(app.globalData.userInfo.gender=='1') {
+  onGender: function () {
+    if (this.data.genderIndex == '1') {
       this.setData({
-        gender: 'https://images.t0k.xyz/man.png'
+        gender: 'https://www.tanyang.asia/icon/man.png'
       })
-                  
-    }else{
+
+    } else {
       this.setData({
-        gender: 'https://www.t0k.xyz/woman.png'
+        gender: 'https://www.tanyang.asia/icon/woman.png'
       })
     }
   },
 
-  onPullDownRefresh:function(e) {
+  onPullDownRefresh: function (e) {
     this.onLoad()
   },
 
-  onReachBottom: function() {
+  onReachBottom: function () {
     this.getData()
   },
 
+  onLogin: function () {
+    wx.navigateTo({
+      url: "/pages/login/login",
+    })
+  },
+
+  onCertify: function () {
+    wx.navigateTo({
+      url: "/pages/certify/certify",
+    })
+  },
+
   onLoad: function (options) {
-   
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          wx.authorize({
-            scope: 'scope.userInfo',
-            success () {
-              
-            },
-            fail () {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            }
+    let that = this;
+    wx.request({
+      url: 'https://www.tanyang.asia/api/selectUsersInfo.php',
+      method: 'POST',
+      data: {
+        openid: app.globalData.openid
+        // imgList: JSON.stringify(that.data.imgList)
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        console.log('查询数据：', res.data[0].czid)
+        that.setData({
+          rewardPoints: res.data[0].rewardPoints,
+          czid: 'czid:' + res.data[0].czid
+        })
+        if (res.data[0].id != null) {
+          that.setData({
+            certified: false
+          })
+        } else {
+          that.setData({
+            certified: true
           })
         }
       }
-    }) //获取用户信息授权
-    wx.login({
-      success: (res) => {
-        this.setData({
-          avatarUrl: app.globalData.userInfo.avatarUrl,
-          nickName: app.globalData.userInfo.nickName
-        })
-        this.onGender();
-      },
     })
-    
+
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              that.setData({
+                display: false,
+                avatarUrl: res.userInfo.avatarUrl,
+                nickName: res.userInfo.nickName,
+                genderIndex: res.userInfo.gender
+              })
+              that.onGender();
+            }
+          })
+        } else {
+          that.setData({
+            display: true,
+            avatarUrl: 'https://www.tanyang.asia/icon/logo.png',
+            nickName: '小橙',
+            czid: ''
+          })
+        }
+      }
+    }) //获取用户的当前设置
 
 
-   
+
+
+
   },
 
   /**
@@ -211,5 +199,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  afterRead(e) {
+    console.log(111111, e)
   }
 })
